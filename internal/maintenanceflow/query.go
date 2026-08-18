@@ -3,7 +3,7 @@ package maintenanceflow
 func Active(states []State) []State {
 	out := make([]State, 0, len(states))
 	for _, s := range states {
-		if s == Planned || s == InProgress {
+		if s == Planned || s == InProgress || s == Rechecking {
 			out = append(out, s)
 		}
 	}

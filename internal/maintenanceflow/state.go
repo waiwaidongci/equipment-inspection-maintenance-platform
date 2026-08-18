@@ -9,4 +9,4 @@ const (
 	Closed     State = "closed"
 )
 
-func (s State) Open() bool { return s == Planned || s == InProgress }
+func (s State) Open() bool { return s == Planned || s == InProgress || s == Rechecking }
