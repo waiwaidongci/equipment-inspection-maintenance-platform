@@ -13,4 +13,10 @@ func (l *Ledger) Acquire() *Lease {
 	}
 	return &Lease{l: l}
 }
-func (x *Lease) Release() { x.l.Open--; x.closed = true }
+func (x *Lease) Release() {
+	if x.closed {
+		return
+	}
+	x.l.Open--
+	x.closed = true
+}
