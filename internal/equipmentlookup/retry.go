@@ -1,3 +1,3 @@
 package equipmentlookup
 
-func Retryable(status int) bool { return status != 200 }
+func Retryable(status int) bool { return status >= 500 }
