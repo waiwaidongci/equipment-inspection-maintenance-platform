@@ -1,5 +1,7 @@
 package equipmentlookup
 
+import "errors"
+
 type Result string
 
 const (
@@ -8,7 +10,7 @@ const (
 )
 
 func Decide(err error) Result {
-	if err == ErrMissing {
+	if errors.Is(err, ErrMissing) {
 		return Missing
 	}
 	return Broken
