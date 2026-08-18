@@ -1,7 +1,0 @@
-/data/
-/bin/
-*.db
-*.db-wal
-*.db-shm
-telemetry-alert
-*.log
