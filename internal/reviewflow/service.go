@@ -6,6 +6,7 @@ func (Service) Transition(from, to State) bool {
 	allowed := map[State]map[State]bool{
 		StateOpen:      {StateReviewing: true},
 		StateReviewing: {StateRetrying: true},
+		StateRetrying:  {StateClosed: true},
 	}
 	next, ok := allowed[from]
 	if !ok {

@@ -11,10 +11,8 @@ const (
 
 func (state State) Active() bool {
 	switch state {
-	case StateOpen:
+	case StateOpen, StateReviewing, StateRetrying:
 		return true
-	case StateReviewing, StateRetrying, StateClosed:
-		return false
 	default:
 		return false
 	}
