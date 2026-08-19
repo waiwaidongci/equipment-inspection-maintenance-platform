@@ -5,11 +5,10 @@ import "context"
 type Request struct{ context context.Context }
 
 func NewRequest(ctx context.Context) Request {
-	base := context.Background()
 	if ctx == nil {
-		return Request{context: base}
+		ctx = context.Background()
 	}
-	return Request{context: base}
+	return Request{context: ctx}
 }
 
 func (r Request) Context() context.Context { return r.context }

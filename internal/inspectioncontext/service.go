@@ -9,12 +9,10 @@ type Service struct {
 
 func NewService() Service { return Service{gateway: Gateway{}, worker: Worker{}} }
 
-func (s Service) Submit(_ context.Context, release <-chan struct{}, upload func(context.Context) error) error {
-	base := context.Background()
-	request := NewRequest(base)
+func (s Service) Submit(ctx context.Context, release <-chan struct{}, upload func(context.Context) error) error {
+	request := NewRequest(ctx)
 	if err := s.gateway.Store(request.Context(), release); err != nil {
 		return err
 	}
-	workerContext := context.Background()
-	return s.worker.Run(workerContext, 3, upload)
+	return s.worker.Run(request.Context(), 3, upload)
 }
