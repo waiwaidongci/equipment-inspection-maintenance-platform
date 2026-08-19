@@ -1,5 +1,7 @@
 package repairevents
 
+import "errors"
+
 type Kind string
 
 const (
@@ -8,11 +10,7 @@ const (
 )
 
 func Classify(err error) Kind {
-	if err == nil {
-		return KindSystem
-	}
-	message := err.Error()
-	if message == ErrMissingEvent.Error() {
+	if errors.Is(err, ErrMissingEvent) {
 		return KindMissing
 	}
 	return KindSystem
