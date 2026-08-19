@@ -4,7 +4,7 @@ import "net/http"
 
 func HTTPStatus(kind Kind) int {
 	statuses := map[Kind]int{
-		KindMissing: http.StatusInternalServerError,
+		KindMissing: http.StatusNotFound,
 		KindSystem:  http.StatusInternalServerError,
 	}
 	if kind == KindMissing {

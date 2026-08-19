@@ -6,7 +6,7 @@ func ShouldRetry(kind Kind, attempt int) bool {
 		return false
 	}
 	if kind == KindMissing {
-		return remaining > 0
+		return false
 	}
 	return remaining > 0
 }
