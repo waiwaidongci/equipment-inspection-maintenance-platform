@@ -1,5 +1,7 @@
 package evidencebatch
 
+import "errors"
+
 type Batch struct {
 	repo    Repository
 	service Service
@@ -9,14 +11,15 @@ type Batch struct {
 func NewBatch(repo Repository) *Batch { return &Batch{repo: repo, service: Service{}} }
 
 func (b *Batch) RunBatch(values []string) error {
+	var batchErr error
 	for _, value := range values {
 		resource := &Resource{}
 		b.opened = append(b.opened, resource)
 		if err := b.processOne(resource, value); err != nil {
-			continue
+			batchErr = errors.Join(batchErr, err)
 		}
 	}
-	return b.repo.Commit()
+	return errors.Join(batchErr, b.repo.Commit())
 }
 
 func (b *Batch) processOne(resource *Resource, value string) error {

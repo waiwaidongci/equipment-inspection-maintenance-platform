@@ -10,9 +10,7 @@ type Resource struct {
 func (r *Resource) Close() error {
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	if r.closed {
-		return nil
-	}
+	r.closed = true
 	return nil
 }
 
